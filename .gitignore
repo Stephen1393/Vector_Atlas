@@ -2,3 +2,4 @@
 vectorAtlas
 *.o
 *.dSYM
+build/
