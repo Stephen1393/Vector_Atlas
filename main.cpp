@@ -1,6 +1,7 @@
  #include <iostream>
- #include <string>
- #include <cctype>
+ #include "server/server.hpp"
 
-int main() {}
+int main() {
+    startServer();
+}
 

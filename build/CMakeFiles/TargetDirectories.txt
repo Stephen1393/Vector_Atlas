@@ -1,0 +1,3 @@
+/Users/Stephen/Documents/All projects/VectorAtlas/build/CMakeFiles/VectorAtlas.dir
+/Users/Stephen/Documents/All projects/VectorAtlas/build/CMakeFiles/edit_cache.dir
+/Users/Stephen/Documents/All projects/VectorAtlas/build/CMakeFiles/rebuild_cache.dir
