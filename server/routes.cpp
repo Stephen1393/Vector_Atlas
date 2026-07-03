@@ -1,9 +1,11 @@
 #include <crow.h>
+#include "server.hpp"
+#include "routes.hpp"
 
-void routes() {
-    
-    CROW_ROUTE(app, "/")([]()) {
-    return "hello World!";
+void routeComponents(crow::SimpleApp&app) {
+
+    CROW_ROUTE(app,"/") ([](){
+        return  "Project VectorAtlas";
+    });
 
 };
-} 
