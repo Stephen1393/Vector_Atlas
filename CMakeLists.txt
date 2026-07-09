@@ -12,6 +12,7 @@ add_executable(
     VectorAtlas
     main.cpp
     server/server.cpp
+    extraction/text.cpp
 
 )
 
@@ -19,4 +20,5 @@ target_link_libraries(
     VectorAtlas
     PRIVATE
     Crow::Crow
+    mupdf
 )
