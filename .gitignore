@@ -3,3 +3,4 @@ vectorAtlas
 *.o
 *.dSYM
 build/
+.vscode/launch.json

@@ -10,15 +10,29 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(
     VectorAtlas
-    main.cpp
     server/server.cpp
     extraction/text.cpp
 
 )
 
+##test executable
+
+add_executable(
+    scratch_test
+    scratch_test/scratch.cpp
+    extraction/text.cpp
+)
+
+
 target_link_libraries(
     VectorAtlas
     PRIVATE
     Crow::Crow
+    mupdf
+)
+
+target_link_libraries(
+    scratch_test
+    PRIVATE
     mupdf
 )
