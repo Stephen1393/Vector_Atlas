@@ -1,4 +1,4 @@
 #pragma once
 
-void extract_text();
+auto extract_text(std:: string);
 
