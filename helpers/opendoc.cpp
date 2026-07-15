@@ -17,15 +17,15 @@ OpenResult open_doc(std:: string path) {
 
     doc = result.doc; 
     ctx = result.ctx;
-
-    } fz_catch(ctx) {
-        
-    fz_throw(ctx, FZ_ERROR_GENERIC, "Couldn't open PDF");
-
-    fz_rethrow(ctx);
   
-  }
-  
+  } fz_catch(ctx) {
+      
+      fz_throw(ctx, FZ_ERROR_GENERIC, "Couldn't open PDF"); 
+      
+      fz_rethrow(ctx);
+    
+    }
+
   return result;
 
 }

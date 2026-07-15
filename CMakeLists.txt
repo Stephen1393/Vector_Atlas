@@ -12,6 +12,7 @@ add_executable(
     VectorAtlas
     server/server.cpp
     extraction/text.cpp
+    helpers/opendoc.cpp
 
 )
 
@@ -21,7 +22,8 @@ add_executable(
     scratch_test
     scratch_test/scratch.cpp
     extraction/text.cpp
-)
+    helpers/opendoc.cpp
+    )
 
 
 target_link_libraries(
