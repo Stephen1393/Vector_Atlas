@@ -1,4 +1,6 @@
 #pragma once
+#include <mupdf/fitz.h>
+#include <string>
 
-auto extract_text(std:: string);
+std:: string extract_text(fz_document* doc);
 

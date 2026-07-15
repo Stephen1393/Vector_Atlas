@@ -1,5 +1,6 @@
  #pragma once
  #include <string>
  #include <mupdf/fitz.h>
+ #include "open_result.hpp"
 
- fz_document* open_doc(std:: string);
+OpenResult open_doc(std:: string);
