@@ -14,14 +14,14 @@ std:: string  extract_text(fz_document* doc) {
    fz_context *ctx = result.ctx;
    fz_document *doc = result.doc;
 
+     std:: string total = ""; 
+
    fz_try(ctx) { //start out try/catch error...
 
    
       int pages = fz_count_pages(ctx,doc);
 
       int page_count = 0;
-      std:: string total = ""; 
-
 
      //start of pages loop... 
 
@@ -101,7 +101,9 @@ std:: string  extract_text(fz_document* doc) {
             fz_throw(ctx, FZ_ERROR_GENERIC, "couldn't load document");
          
          } //end outer error
-      
+
+         return total;
+
       }
 
 
