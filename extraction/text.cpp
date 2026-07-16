@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include "../helpers/open_result.hpp"
+#include <stdexcept>
 
 std:: string  extract_text(fz_document* doc) {
   
@@ -15,9 +16,6 @@ std:: string  extract_text(fz_document* doc) {
    fz_document *doc = result.doc;
 
      std:: string total = ""; 
-
-   fz_try(ctx) { //start out try/catch error...
-
    
       int pages = fz_count_pages(ctx,doc);
 
@@ -36,7 +34,7 @@ std:: string  extract_text(fz_document* doc) {
             fz_page* page = nullptr;
       
          
-         fz_try(ctx) { //start inner try/catch...
+         fz_try(ctx) { //start try/catch...
       
       
             page = fz_load_page(ctx, doc, page_count);
@@ -81,33 +79,11 @@ std:: string  extract_text(fz_document* doc) {
                
                fz_catch(ctx) { 
                   
-                  fz_throw(ctx, FZ_ERROR_GENERIC, "Couldn't load page number %d", page_count);
-      
-                  fz_rethrow(ctx);
+                  throw std:: runtime_error(fz_caught_message(ctx));
                
-               } //ends inner error
+               } //ends error check
             
             } //end loop
-         
-         }  
-         
-         fz_always(ctx) {
-
-            fz_drop_document(ctx, doc);
-            fz_drop_context(ctx);
-         }
-         
-      fz_catch(ctx) {
-            fz_throw(ctx, FZ_ERROR_GENERIC, "couldn't load document");
-         
-         } //end outer error
 
          return total;
-
       }
-
-
-
-
-
-

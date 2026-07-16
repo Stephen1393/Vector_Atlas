@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include "open_result.hpp"
+#include "stdexcept"
 
 OpenResult open_doc(std:: string path) {
 
@@ -18,13 +19,10 @@ OpenResult open_doc(std:: string path) {
     doc = result.doc; 
     ctx = result.ctx;
   
-  } fz_catch(ctx) {
-      
-      fz_throw(ctx, FZ_ERROR_GENERIC, "Couldn't open PDF"); 
-      
-      fz_rethrow(ctx);
-    
-    }
+    } fz_catch(ctx) { 
+
+        throw std:: runtime_error(fz_caught_message(ctx));
+      }
 
   return result;
 

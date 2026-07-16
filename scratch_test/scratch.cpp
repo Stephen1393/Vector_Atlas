@@ -1,25 +1,24 @@
 
 #include "../extraction/text.cpp"
 #include "../helpers/opendoc.hpp"
+#include "../helpers/open_result.hpp"
 #include <string>
+#include <stdexcept>
 
 int main() {
+
+    try {
  
-    fz_document* doc = open_doc("../PDFs/01_The_Birth_of_the_Universe.pdf");
+    OpenResult result = open_doc("../PDFs/01_The_Birth_of_the_Universe.pdf");
 
-     std:: string text = extract_text(doc);
+    std:: string text = extract_text(result.doc);
 
-    if (!text.empty()) {
+    } catch (const std::exception&e)
+    {
+        std::cerr << e.what() << '\n';
+        return 1;
 
-        std::cout << text << '.\n';
     }
-
-    else {
-
-        std:: cout << "Empty string" << '\n';
-    }
-
-    return 1;
 
 }
 
