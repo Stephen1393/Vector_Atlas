@@ -6,7 +6,7 @@
 #include "../helpers/open_result.hpp"
 #include <stdexcept>
 
-std:: string  extract_text(fz_document* doc) {
+std:: string  extract_text(OpenResult) {
   
    //use ctx and doc from OpenResult - keeping it same throughout pipline
    
@@ -23,9 +23,9 @@ std:: string  extract_text(fz_document* doc) {
 
      //start of pages loop... 
 
-      fz_page *page = fz_load_page(ctx,doc,page_count); {
+      fz_page *page = fz_load_page(ctx,doc,page_count); 
       
-         for (int page_count{0}; page_count < pages; ++page_count);
+         for (int page_count{0}; page_count < pages; ++page_count) {
       
             fz_stext_page* struc = nullptr;
             fz_device* dev = nullptr;
@@ -71,10 +71,10 @@ std:: string  extract_text(fz_document* doc) {
       
                }  fz_always(ctx) {
       
-                  fz_drop_page(ctx, page);
                   fz_drop_buffer(ctx, buf);
                   fz_drop_device(ctx, dev);
                   fz_drop_stext_page(ctx, struc);
+                  fz_drop_page(ctx, page);
                } 
                
                fz_catch(ctx) { 
