@@ -10,6 +10,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(
     VectorAtlas
+    main.cpp
     server/server.cpp
     extraction/text.cpp
     helpers/opendoc.cpp
