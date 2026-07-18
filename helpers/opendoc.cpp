@@ -6,11 +6,13 @@
 #include "open_result.hpp"
 #include "stdexcept"
 
-OpenResult open_doc(std:: string path) {
+OpenResult open_doc(const std:: string&path) {
 
   OpenResult result;
   
     fz_context *ctx = fz_new_context(nullptr, nullptr, FZ_STORE_DEFAULT);
+
+    fz_register_document_handlers(ctx);
 
     fz_try(ctx) {
 

@@ -3,4 +3,4 @@
  #include <mupdf/fitz.h>
  #include "open_result.hpp"
 
-OpenResult open_doc(std:: string);
+OpenResult open_doc(const std:: string&path);
