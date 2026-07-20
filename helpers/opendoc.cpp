@@ -10,20 +10,17 @@ OpenResult open_doc(const std:: string&path) {
 
   OpenResult result;
   
-    fz_context *ctx = fz_new_context(nullptr, nullptr, FZ_STORE_DEFAULT);
+    result.ctx = fz_new_context(nullptr, nullptr, FZ_STORE_DEFAULT);
 
-    fz_register_document_handlers(ctx);
+    fz_register_document_handlers(result.ctx);
 
-    fz_try(ctx) {
+    fz_try(result.ctx) {
 
-    fz_document *doc = fz_open_document(ctx, path.c_str());
-
-    doc = result.doc; 
-    ctx = result.ctx;
+    result.doc = fz_open_document(result.ctx, path.c_str());
   
-    } fz_catch(ctx) { 
+    } fz_catch(result.ctx) { 
 
-        throw std:: runtime_error(fz_caught_message(ctx));
+        throw std:: runtime_error(fz_caught_message(result.ctx));
       }
 
   return result;
