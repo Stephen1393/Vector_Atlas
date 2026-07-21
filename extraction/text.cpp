@@ -6,12 +6,10 @@
 #include "../helpers/open_result.hpp"
 #include <stdexcept>
 
-std:: string  extract_text(OpenResult) {
+std:: string  extract_text(OpenResult result) {
   
    //use ctx and doc from OpenResult - keeping it same throughout pipline
    
-   OpenResult result;
-
    fz_context *ctx = result.ctx;
    fz_document *doc = result.doc;
 
@@ -19,12 +17,8 @@ std:: string  extract_text(OpenResult) {
    
       int pages = fz_count_pages(ctx,doc);
 
-      int page_count = 0;
-
      //start of pages loop... 
 
-      fz_page *page = fz_load_page(ctx,doc,page_count); 
-      
          for (int page_count{0}; page_count < pages; ++page_count) {
       
             fz_stext_page* struc = nullptr;
@@ -38,37 +32,47 @@ std:: string  extract_text(OpenResult) {
       
       
             page = fz_load_page(ctx, doc, page_count);
-      
-            fz_stext_page *struc = fz_keep_stext_page(ctx, struc);
-      
-            //is a page containing structured text from PDF
-      
-            fz_device *dev = fz_new_stext_device(ctx, struc, nullptr);
+            
+            // load page
 
-            //create extracting text device
+            fz_rect bounds = fz_bound_page(ctx, page);
+
+            //get the page boundaries
+
+            struc = fz_new_stext_page(ctx, bounds);
+            
+            //an empty containe
+
+            dev = fz_new_stext_device(ctx, struc, nullptr);
+
+            //create extracting text device -- knows how to read PDF
       
             fz_run_page(ctx, page, dev, fz_identity, nullptr);
       
-            //renders page
+            //renders page - device sees drawing instructions, stores them in struc
+
+            fz_close_device(ctx, dev);
+
+            //close device - no more data will be written in struc
       
-            fz_buffer *buf = fz_new_buffer(ctx, 1024);
+            buf = fz_new_buffer(ctx, 1024);
       
             //creates space in memory to allow bytes
       
-            fz_output * output = fz_new_output_with_buffer(ctx, buf);
+            output = fz_new_output_with_buffer(ctx, buf);
       
             //stream that flows to the space in memory
       
             fz_print_stext_page_as_text(ctx, output, struc);
-      
-            //prints text from structured text page
+           
+            //prints characters from struc into output
+
+            fz_close_output(ctx, output);
       
             std::string text = fz_string_from_buffer(ctx, buf);
+
+            total = text;
             
-            
-            total = total + text;
-      
-      
                }  fz_always(ctx) {
       
                   fz_drop_buffer(ctx, buf);

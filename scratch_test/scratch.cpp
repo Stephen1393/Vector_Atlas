@@ -3,17 +3,21 @@
 #include "../helpers/open_result.hpp"
 #include <string>
 #include <stdexcept>
+#include <filesystem>
 #include <iostream>
 
 int main() {
 
     OpenResult result;
 
+
     try {
- 
-    OpenResult result = open_doc("../PDFs/01_The_Birth_of_the_Universe.pdf");
+
+    result = open_doc("PDFs/01_The_Birth_of_the_Universe.pdf");
 
     std:: string text = extract_text(result);
+
+    std:: cout << text << '\n';
 
     return 0;
 
